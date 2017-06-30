@@ -1,31 +1,44 @@
-## What for
+# WTF
 
-- [x] Detecting optically "empty" strings consisting of whitespaces / non-printable symbols / escape codes only
-- [x] Cleaning up ANSI escape codes
-
-## Usage
-
-Measuring "printable" text length:
+A little regex helper for telling the "printable" (visible) parts of a string from the invisible ones: whitespaces, newlines, control characters, ANSI styling, etc.
 
 ```javascript
-const { printableText } = require ('printable-characters')
+const nonPrintableCharacters = '\ \0-\x1F\x7F-\x9F\xAD\u0378\u0379\u037F-\u0383 .... // long long regexp
+    , printableCharacters = '^' + nonPrintableCharacters
+    , ansiEscapeCodes = '[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-PRZcf-nqry=><]'
 
-if (printableText (str).length === 0) {
-    
-    // this string appears as empty string
+module.exports = {
+
+    nonPrintableCharacters: new RegExp ('(' + ansiEscapeCodes + ')|[' + nonPrintableCharacters + ']', 'g'),
+       printableCharacters: new RegExp ('[' + printableCharacters + ']', 'g'),
+           ansiEscapeCodes: new RegExp (ansiEscapeCodes, 'g'),
 }
 ```
 
-Accessing `ansiEscapeCodes` and `printableCharacters` regular expressions:
+## How to
 
 ```javascript
-const { ansiEscapeCodes, printableCharacters  } = require ('printable-characters')
+/*                              Example #1: Counting visible letters
+ */
 
-const fillWithWhitespaces = str => str
-                                    .replace (ansiEscapeCodes, '')
-                                    .replace (printableCharacters, ' ')
+const { nonPrintableCharacters } = require ('printable-characters')
 
-assert.equal (fillWithWhitespaces ('\u001b[106m' + 'foo\tbar\nbaz'), '   \t   \n   ')
+const printableTextOnly = s => s.replace (nonPrintableCharacters, '')
+    , looksEmpty = s => printableTextOnly (s).length === 0
+
+looksEmpty ('foobar')                                  // === false
+looksEmpty ('\u001b[106m  \t  \t   \n     \u001b[49m') // === true
 ```
 
-There is also `nonPrintableCharacters` member, which is inverse of `printableCharacters`.
+```javascript
+/*                              Example #2: Cleaning ANSI codes
+ */
+
+const { ansiEscapeCodes } = require ('printable-characters')
+
+const brightCyanBg = '\u001b[106m'
+    , noBgColor    = '\u001b[49m'
+
+const foobar_withANSICodes = brightCyanBg + 'foobar' + noBgColor
+    , foobar               = foobar_withANSICodes.replace (ansiEscapeCodes, '') // === "foobar"
+```

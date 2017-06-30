@@ -1,15 +1,28 @@
 const assert = require ('assert')
-const { ansiEscapeCodes, printableCharacters, printableText } = require ('./printable-characters')
 
 describe ('printable-characters', () => {
 
-    it ('works', () => {
+    it ('counting visible letters works', () => {
 
-        const text = '\u001b[106m' + 'a bc\tdef\nghjk' + '\u001b[49m'
+		const { nonPrintableCharacters } = require ('./printable-characters')
 
-        assert.equal (printableText (text), 'abcdefghjk')
-        
-        assert.equal (text.replace (ansiEscapeCodes, '')
-                          .replace (printableCharacters, '?'), '? ??\t???\n????')
-    })
+		const printableTextOnly = s => s.replace (nonPrintableCharacters, '')
+			, looksEmpty = s => printableTextOnly (s).length === 0
+
+		assert (!looksEmpty ('foobar'))
+		assert ( looksEmpty ('\u001b[106m  \t  \t   \n     \u001b[49m'))
+	})
+
+	it ('removing ANSI codes works', () => {
+
+		const { ansiEscapeCodes } = require ('./printable-characters')
+
+		const brightCyanBg = '\u001b[106m'
+		    , noBgColor    = '\u001b[49m'
+
+		const foobar_withANSICodes = brightCyanBg + 'foobar' + noBgColor
+		    , foobar               = foobar_withANSICodes.replace (ansiEscapeCodes, '')
+
+		assert ('foobar' === foobar)
+	})
 })
