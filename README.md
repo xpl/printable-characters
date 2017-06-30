@@ -1,7 +1,7 @@
 # What for
 
-[x] Detecting optically "empty" strings consisting of whitespaces / non-printable symbols / escape codes only
-[x] Cleaning up ANSI escape codes
+- [x] Detecting optically "empty" strings consisting of whitespaces / non-printable symbols / escape codes only
+- [x] Cleaning up ANSI escape codes
 
 # Usage
 
