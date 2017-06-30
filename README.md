@@ -11,8 +11,8 @@ Measuring "printable" text length:
 const { printableText } = require ('printable-characters')
 
 if (printableText (str).length === 0) {
-	
-	// this string appears as empty string
+    
+    // this string appears as empty string
 }
 ```
 
@@ -22,8 +22,8 @@ Accessing `ansiEscapeCodes` and `printableCharacters` regular expressions:
 const { ansiEscapeCodes, printableCharacters  } = require ('printable-characters')
 
 const fillWithWhitespaces = str => str
-									.replace (ansiEscapeCodes, '')
-									.replace (printableCharacters, ' ')
+                                    .replace (ansiEscapeCodes, '')
+                                    .replace (printableCharacters, ' ')
 
 assert.equal (fillWithWhitespaces ('\u001b[106m' + 'foo\tbar\nbaz'), '   \t   \n   ')
 ```

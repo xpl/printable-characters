@@ -7,10 +7,10 @@ const ansiEscapeCodes = /[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[
 
 module.exports = Object.freeze ({
 
-	ansiEscapeCodes,
-	printableCharacters,
-	nonPrintableCharacters,
+    ansiEscapeCodes,
+    printableCharacters,
+    nonPrintableCharacters,
 
-	printableText: x => x.replace (ansiEscapeCodes, '')
-						 .replace (nonPrintableCharacters, '')
+    printableText: x => x.replace (ansiEscapeCodes, '')
+                         .replace (nonPrintableCharacters, '')
 })
