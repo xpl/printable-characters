@@ -1,0 +1,32 @@
+{
+  "name": "printable-characters",
+  "version": "1.0.0",
+  "description": "A function for matching/counting [non-]printable characters in a string",
+  "main": "printable-characters.js",
+  "scripts": {
+    "test": "mocha --reporter spec --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xpl/printable-characters.git"
+  },
+  "keywords": [
+    "visible symbols",
+    "invisible symbols",
+    "printable characters",
+    "non-printable characters",
+    "nonprintable characters",
+    "characters",
+    "symbols",
+    "string length",
+    "real string length",
+    "string trimming"
+  ],
+  "author": "Vitaly Gordon <rocket.mind@gmail.com>",
+  "license": "Unlicense",
+  "homepage": "https://github.com/xpl/printable-characters",
+  "devDependencies": {
+    "babel-preset-es2015": "^6.14.0",
+    "mocha": "^2.4.5"
+  }
+}
