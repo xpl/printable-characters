@@ -14,7 +14,7 @@ module.exports = {
 }
 ```
 
-Detecting blank text:
+## Detecting blank text
 
 ```javascript
 const { nonPrintableCharacters } = require ('printable-characters')
@@ -26,7 +26,7 @@ looksEmpty ('foobar') // === false
 looksEmpty ('\u001b[106m  \t  \t   \n     \u001b[49m') // === true
 ```
 
-Trimming ANSI codes:
+## Trimming ANSI codes
 
 ```javascript
 const { ansiEscapeCodes } = require ('printable-characters')
@@ -38,7 +38,7 @@ const foobar_withANSICodes = brightCyanBg + 'foobar' + noBgColor
     , foobar               = foobar_withANSICodes.replace (ansiEscapeCodes, '') // === "foobar"
 ```
 
-Matching visible letters:
+## Matching visible letters
 
 ```javascript
 const { printableCharacters } = require ('printable-characters')
