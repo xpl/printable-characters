@@ -52,7 +52,7 @@ const string = 'foo\tbar\nbaz qux'
 string.replace (printableCharacters, '*') // ***\t***\n*** ***'
 ```
 
-Does not account ANSI codes! You will need to take care of them manually, e.g. trimming those before applying match:
+Does not account ANSI codes! You will need to take care of them manually, e.g. by simply trimming them before:
 
 ```javascript
 const { ansiEscapeCodes, printableCharacters } = require ('printable-characters')
