@@ -30,7 +30,7 @@ looksEmpty ('\u001b[106m  \t  \t   \n     \u001b[49m') // === true
 
 ## Matching the visible
 
-Can also be useful for something like this: [string.bullet](https://github.com/xpl/string.bullet)). Does not account ANSI codes! You will need to take care of them manually (see an example below).
+Can also be useful for something like this: [string.bullet](https://github.com/xpl/string.bullet). Does not account ANSI codes! You will need to take care of them manually (see an example below).
 
 ```javascript
 const { printableCharacters } = require ('./printable-characters')
