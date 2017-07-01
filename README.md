@@ -14,8 +14,6 @@ module.exports = {
 }
 ```
 
-## Matching the invisible
-
 Detecting blank text:
 
 ```javascript
@@ -28,7 +26,7 @@ looksEmpty ('foobar') // === false
 looksEmpty ('\u001b[106m  \t  \t   \n     \u001b[49m') // === true
 ```
 
-Removing ANSI codes:
+Trimming ANSI codes:
 
 ```javascript
 const { ansiEscapeCodes } = require ('printable-characters')
@@ -40,9 +38,7 @@ const foobar_withANSICodes = brightCyanBg + 'foobar' + noBgColor
     , foobar               = foobar_withANSICodes.replace (ansiEscapeCodes, '') // === "foobar"
 ```
 
-## Matching the visible
-
-Can also be useful for something like this: [string.bullet](https://github.com/xpl/string.bullet).
+Matching visible letters:
 
 ```javascript
 const { printableCharacters } = require ('printable-characters')
@@ -52,7 +48,7 @@ const string = 'foo\tbar\nbaz qux'
 string.replace (printableCharacters, '*') // ***\t***\n*** ***'
 ```
 
-Does not account ANSI codes! You will need to take care of them manually, e.g. by simply trimming them before:
+Unfortunately, the `printableCharacters` regexp does not account ANSI escape codes (seems too complex task for a regular expression). So you will need to take care of them manually, e.g. by simply trimming them in a separate step before:
 
 ```javascript
 const { ansiEscapeCodes, printableCharacters } = require ('printable-characters')
