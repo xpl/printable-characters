@@ -45,7 +45,7 @@ const foobar_withANSICodes = brightCyanBg + 'foobar' + noBgColor
 Can also be useful for something like this: [string.bullet](https://github.com/xpl/string.bullet).
 
 ```javascript
-const { printableCharacters } = require ('./printable-characters')
+const { printableCharacters } = require ('printable-characters')
 
 const string = 'foo\tbar\nbaz qux'
 
@@ -55,7 +55,7 @@ string.replace (printableCharacters, '*') // ***\t***\n*** ***'
 Does not account ANSI codes! You will need to take care of them manually, e.g. trimming those before applying match:
 
 ```javascript
-const { ansiEscapeCodes, printableCharacters } = require ('./printable-characters')
+const { ansiEscapeCodes, printableCharacters } = require ('printable-characters')
 
 string
     .replace (ansiEscapeCodes, '')
