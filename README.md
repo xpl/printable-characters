@@ -10,9 +10,9 @@ const ansiEscapeCode = '[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0
 
 module.exports = {
 
-	nonPrintableCharacters: new RegExp ('(' + ansiEscapeCode + ')|[' + nonPrintableCharacter + ']', 'g'),
-	   printableCharacters: new RegExp ('[^' + nonPrintableCharacter + ']', 'g'),
-		   ansiEscapeCodes: new RegExp (ansiEscapeCode, 'g')
+    nonPrintableCharacters: new RegExp ('(' + ansiEscapeCode + ')|[' + nonPrintableCharacter + ']', 'g'),
+       printableCharacters: new RegExp ('[^' + nonPrintableCharacter + ']', 'g'),
+           ansiEscapeCodes: new RegExp (ansiEscapeCode, 'g')
 }
 ```
 
