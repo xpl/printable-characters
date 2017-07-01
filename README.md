@@ -14,7 +14,7 @@ module.exports = {
 }
 ```
 
-## Counting visible letters
+## Trimming to visible letters only / detecting empty strings
 
 ```javascript
 const { nonPrintableCharacters } = require ('printable-characters')
@@ -36,4 +36,14 @@ const brightCyanBg = '\u001b[106m'
 
 const foobar_withANSICodes = brightCyanBg + 'foobar' + noBgColor
     , foobar               = foobar_withANSICodes.replace (ansiEscapeCodes, '') // === "foobar"
+```
+
+## Matching visible letters
+
+```javascript
+const { printableCharacters } = require ('./printable-characters')
+
+const string = 'foo\tbar\nbaz qux'
+
+string.replace (printableCharacters, '*') // ***\t***\n*** ***'
 ```
