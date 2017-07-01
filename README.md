@@ -57,3 +57,9 @@ string
     .replace (ansiEscapeCodes, '')
     .replace (printableCharacters, '*')
 ```
+
+## Applications
+
+- [string.bullet](https://github.com/xpl/string.bullet) — ASCII-mode bulleting for the list-style data
+- [string.ify](https://github.com/xpl/string.ify) — a fancy pretty printer for JavaScript entities
+- [ololog](https://github.com/xpl/ololog) — a better `console.log` for the log-driven debugging junkies!
