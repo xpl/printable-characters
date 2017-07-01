@@ -1,6 +1,6 @@
 {
   "name": "printable-characters",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "A function for matching/counting [non-]printable characters in a string",
   "main": "printable-characters.js",
   "scripts": {
