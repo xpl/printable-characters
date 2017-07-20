@@ -26,17 +26,6 @@ looksEmpty ('foobar') // === false
 looksEmpty ('\u001b[106m  \t  \t   \n     \u001b[49m') // === true
 ```
 
-## Counting visible letters
-
-```javascript
-const { nonPrintableCharacters } = require ('printable-characters')
-
-const visibleLength = s => s.replace (nonPrintableCharacters, '').length
-
-visibleLength ('foobar') // === 6
-visibleLength ('\u001b[106mfoobar\u001b[49m') // === 6
-```
-
 ## Trimming ANSI codes
 
 ```javascript
