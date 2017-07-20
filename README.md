@@ -14,7 +14,7 @@ module.exports = {
 }
 ```
 
-## Detecting blank text
+## Detecting blank text / counting visible letters
 
 ```javascript
 const { nonPrintableCharacters } = require ('printable-characters')
