@@ -1,18 +1,35 @@
 {
   "name": "printable-characters",
   "version": "1.0.17",
-  "description": "A function for matching/counting [non-]printable characters in a string",
+  "description": "A little helper for handling strings containing zero width control characters, ANSI styling, whitespaces, newlines, etc.",
   "main": "printable-characters.js",
   "scripts": {
-    "test": "mocha --reporter spec --watch"
+    "test": "nyc --reporter=html --reporter=text mocha --reporter spec",
+    "lint": "eslint as-table.js",
+    "lint-test": "eslint test.js",
+    "autotest": "mocha --reporter spec --watch",
+    "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/xpl/printable-characters.git"
   },
   "keywords": [
+    "string width",
+    "string length",
+    "real string width",
+    "optical string width",
+    "printed width",
+    "strlen",
+    "zero width",
+    "zero width symbols",
+    "zero width characters",
+    "visible characters",
     "visible symbols",
+    "visible",
+    "invisible",
     "invisible symbols",
+    "invisible characters",
     "printable characters",
     "non-printable characters",
     "nonprintable characters",
@@ -20,13 +37,23 @@
     "symbols",
     "string length",
     "real string length",
-    "string trimming"
+    "string trimming",
+    "trimming",
+    "escape codes",
+    "ansi escapes",
+    "tokenizing",
+    "ansi",
+    "whitespaces"
   ],
   "author": "Vitaly Gordon <rocket.mind@gmail.com>",
   "license": "Unlicense",
   "homepage": "https://github.com/xpl/printable-characters",
   "devDependencies": {
     "babel-preset-es2015": "^6.14.0",
-    "mocha": "^2.4.5"
+    "coveralls": "^2.13.1",
+    "eslint": "^4.2.0",
+    "istanbul": "^0.4.5",
+    "mocha": "^3.4.2",
+    "nyc": "^11.0.3"
   }
 }
