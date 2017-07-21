@@ -7,7 +7,7 @@ A little helper for handling strings containing zero width characters, ANSI styl
 ## Determining visible string length
 
 ```javascript
-const { strlen } = require ('./printable-characters')
+const { strlen } = require ('printable-characters')
 
 strlen ('foo bar') // === 7
 strlen ('\u001b[106mfoo bar\u001b[49m') // === 7
@@ -58,8 +58,8 @@ first (s, 6) // === '\u001b[22mfoobar\u001b[22m'
 
 ## Extracting invisible parts followed by visible ones (parsing)
 
-```javascripts
-const { partition } = require ('./printable-characters')
+```javascript
+const { partition } = require ('printable-characters')
 
 partition ('')                        // [                                                     ])
 partition ('foo')                     // [['',          'foo']                                 ])
