@@ -5,7 +5,7 @@ script:
 - npm run lint
 - npm run lint-test
 - npm test
-after_success: npm run coverage
+after_success: npm run coverage && sleep 5s
 deploy:
   provider: npm
   email: "rocket.mind@gmail.com"
