@@ -4,7 +4,7 @@
 
 A little helper for handling strings containing zero width characters, ANSI styling, whitespaces, newlines, etc.
 
-## Determining visible string length
+## Determining real (visible) string length
 
 ```javascript
 const { strlen } = require ('printable-characters')
@@ -44,6 +44,8 @@ s.replace (ansiEscapeCodes, '')     // === 'foo\nbar'
 ```
 
 ## Getting first N visible symbols, preserving the invisible parts
+
+Use for safely truncating strings to maximum width without breaking ANSI codes:
 
 ```javascript
 const { first } = require ('printable-characters')
