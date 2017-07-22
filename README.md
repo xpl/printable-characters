@@ -70,6 +70,7 @@ partition ('\u001b[1mfoo\u0000bar\n') // [['\u001b[1m', 'foo'],   ['\u0000', 'ba
 
 ## Applications
 
+- [as-table](https://github.com/xpl/as-table) — a simple function that prints objects as ASCII tables
 - [string.bullet](https://github.com/xpl/string.bullet) — ASCII-mode bulleting for the list-style data
 - [string.ify](https://github.com/xpl/string.ify) — a fancy pretty printer for JavaScript entities
 - [Ololog!](https://github.com/xpl/ololog) — a better `console.log` for the log-driven debugging junkies!
