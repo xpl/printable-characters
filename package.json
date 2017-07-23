@@ -5,10 +5,10 @@
   "main": "printable-characters.js",
   "scripts": {
     "test": "nyc --reporter=html --reporter=text mocha --reporter spec",
-    "lint": "eslint as-table.js",
-    "lint-test": "eslint test.js",
     "autotest": "mocha --reporter spec --watch",
-    "coverage": "nyc report --reporter=text-lcov | coveralls"
+    "lint": "eslint printable-characters.js",
+    "lint-test": "eslint printable-characters.js",
+    "coveralls": "nyc report --reporter=text-lcov | coveralls"
   },
   "repository": {
     "type": "git",
@@ -58,7 +58,6 @@
   "license": "Unlicense",
   "homepage": "https://github.com/xpl/printable-characters",
   "devDependencies": {
-    "babel-preset-es2015": "^6.14.0",
     "coveralls": "^2.13.1",
     "eslint": "^4.2.0",
     "istanbul": "^0.4.5",

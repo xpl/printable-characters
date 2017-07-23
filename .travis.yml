@@ -1,13 +1,26 @@
 language: node_js
 node_js:
-- node
+- '6'
 script:
+- set -e
 - npm run lint
 - npm run lint-test
-- npm test
-after_success: npm run coverage && sleep 2m
+- npm run test
+- npm run coveralls
+after_success:
+- git config --global user.email "travis@travis-ci.org"
+- git config --global user.name "Travis CI"
+- npm config set git-tag-version=false
+- NPM_VERSION=$(npm version patch)
+- git commit -a -m "${NPM_VERSION:1}" -m "[ci skip]"
+- git remote remove origin
+- git remote add origin https://${GITHUB_TOKEN}@github.com/xpl/string.bullet.git
+- git push origin HEAD:master
 deploy:
   provider: npm
-  email: "rocket.mind@gmail.com"
+  email: rocket.mind@gmail.com
   api_key:
-    secure: QNFnaKIkbbcCuAqO1MkCxmgP7wXUlO6+G6GI56MD+Pg+mRdAHTSuNly8e9LOGioka4ouFBpDSBTuFsHNsoVvrtONzWALajloglewjGth8NaszQ2+8STAC5QdL+L2OokqTB8LU1C7CgZJTQBbGODRMET8O5iYUYbYebar15hTudgXJOKT4irh9/NN9LyOJl993VOXDSOLDhos8pM2n5hTIexotoHGTvurXI7BEwPKPwpCXk2wHuOuAXERfC5h8zvxjvQGJssGuYIFjLl+V8JYsjUS3b7doyGdokv+jUfX6R15i55eXG2dLZApkvXhEvHETN/FtrebfnVIntfZlOVElHQY8xhud4grxQMSD8yOGTA+K16j7k/5ZfBye9qRMcNDynXh2jA7epw0EvNUuiyHlqnqxEXnMbrWhdxfTw9eESZ1wzEFvKty8VFBHX9SZAfIqm3W2Job7Kd4RJD+bVXDdRcExBPdcuuuyUJaMhNc6maulmb5vBFsZw/xnqH1rOYJeXefDrvl7oSBIHTDWrXs3eFC/hTp7GnE7drVTDgbIAiViPefULIm8Jj6pGLG7WKQKfVo4X21o6iXhLOgYWbWwdRFR4rYZFK2IFn4rlHimZr/axGtvxwOVzjZKWNOOWLx1jbtutcJsZzvS3qjXCxnrpIKsNeJqdPYZ7u20dpaA8g=
+    secure: b+HA+5QDP0tMSGUcj6shdOGtck1RJynl9vBbTE0/EhH9l5+FQL819w/VXt8JdvRnDVNWKE26KNGMzqaOCPfwItV1aBQC2u4LW0Ewvttd3B3oBveUy8l2DYZtrXgu8nVhzDzxzAYzL9LlWrdddyRQwOmnGbV0RBBrOk9QqSDLvUu8vLDNh67upA1i3iH97fK/K63cid8T+5SYBIOv18mnAMUjlrYR17UfuwxmpQqeLwadz1ebzJesOxjhtJHzbGwrtfjTTsKQBLnYJkC+J0nybiC2+Kmu+qvvrO8lBJRP4SftQqa4oJRuNz5Xp2DOVqaRV/yF0GxOr0qRqnBJBWg98PQNMHjnxFkAUEtfD1DUpNjLnIcp3jOUgzF+X5/Z7qPAcZWXe5WITOfsb3m8daBJfm9i+GMupxqBl55jXQbOwfs7phfve237y4mxkXg9hrtgl831gqHz+yBE98YsFlJCS9n9bAXlZIdxmcH+rO9XDGtapfOq+LfJkhojOywYZpvn+OeGafvwLsn4vQoNbu/bfi/cRJzaz6DgQbcdfxsiMRvsq6Y+kxMrPdWR2kV6YIPYwUgaaGDaHW+ShcWGm/ibWLp4cor5DVodD3MrjqFmCkxBEF+ZRB/AqIMmtjVmrBJ+17a3YnEOv04B3eV0QvOonID5DcTva1e022HDeZOMcdc=
+env:
+  global:
+    secure: BLOacOEE4UxAMcY25JgbB/OIJ8WWRZIKNOSQYF0A3NgsdXVG7CizUGRxocMD1skM0T50KpoyeQ2YpCJjadlb4BE9Fp9niPlQK2ddrpMGlZObqhzC+NLMX/0AN9Lix6ux4FweIsGWR2cvPBroC/zNcc1hnwphMM3u9sh+xHtwzzPhcHSugDPphwHK7deN9qNgCWfAAMSaDxyX0jQcgVZumwiJ1DVty4c2/DrL7jEJeqT7cg+COa1Jmpeb0/eyOY7VIPq2bHxC9yxG1ElQpxuXOGXppcNp0mKsLnEm20095Rencfm1/OHueqrPi56qJtijPcvSbedeQ7P9/QcP/iiEeKw9fxMdfpBBs+KwF1sP+WBWZibrw6/jCFoJiuHutS66YyaxFAv31ezMfFUxvNlFZU5m6n5dLDORr5z1MOsRiIgPfA9e94LHpi8FGimXzBUmUm8N/w2i4YxdtX/868XOqt8MhMjcKkSvigFezn1+5vBQNVU2SCvgYUjb7x8To2IliFeFAzRkvY3uwJ6eWSSWLFJk0/fksF4uhiFvfVcAwX+HHlmigUkwBD7yvKq7Y2sXo3+3hVVlPtH8tU3MajNtqHstotT4rnMYvYtzZIZ2m9NSdrTOzyzWm6x69945Dgf0IiNAIf72lZ/Fk6OFI+qHRNBZjoK3Pgax+quVjOL6o7I=
