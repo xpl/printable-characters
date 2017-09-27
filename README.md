@@ -4,7 +4,7 @@
 
 A little helper for handling strings containing zero width characters, ANSI styling, whitespaces, newlines, etc.
 
-## Determining real (visible) string length
+## Determining the real (visible) length of a string
 
 ```javascript
 const { strlen } = require ('printable-characters')
@@ -22,7 +22,7 @@ isBlank ('foobar') // === false
 isBlank ('\u001b[106m  \t  \t   \n     \u001b[49m') // === true
 ```
 
-## Obtaining blank string of the same width
+## Obtaining a blank string of the same width
 
 ```javascript
 const { blank } = require ('printable-characters')
@@ -43,7 +43,7 @@ s.replace (ansiEscapeCodes, '')     // === 'foo\nbar'
  .replace (zeroWidthCharacters, '') // === 'foobar'
 ```
 
-## Getting first N visible symbols, preserving the invisible parts
+## Getting the first N visible symbols, preserving the invisible parts
 
 Use for safely truncating strings to maximum width without breaking ANSI codes:
 
@@ -58,7 +58,7 @@ first (s, 3) // === '\u001b[22mfoo\u001b[22m'
 first (s, 6) // === '\u001b[22mfoobar\u001b[22m'
 ```
 
-## Extracting invisible parts followed by visible ones (parsing)
+## Extracting the invisible parts followed by the visible ones (parsing)
 
 ```javascript
 const { partition } = require ('printable-characters')
@@ -74,5 +74,5 @@ partition ('\u001b[1mfoo\u0000bar\n') // [['\u001b[1m', 'foo'],   ['\u0000', 'ba
 
 - [as-table](https://github.com/xpl/as-table) — a simple function that prints objects as ASCII tables
 - [string.bullet](https://github.com/xpl/string.bullet) — ASCII-mode bulleting for the list-style data
-- [string.ify](https://github.com/xpl/string.ify) — a fancy pretty printer for JavaScript entities
+- [string.ify](https://github.com/xpl/string.ify) — a fancy pretty printer for the JavaScript entities
 - [Ololog!](https://github.com/xpl/ololog) — a better `console.log` for the log-driven debugging junkies!
