@@ -1,10 +1,18 @@
-const assert = require ('assert')
+const assert              = require ('assert')
+const printableCharacters = require ('./build/printable-characters')
+
+// cannot use spread operator in tests due to Node v4 compatibility requirements...
+const strlen              = printableCharacters.strlen
+    , isBlank             = printableCharacters.isBlank
+    , blank               = printableCharacters.blank
+    , ansiEscapeCodes     = printableCharacters.ansiEscapeCodes
+    , zeroWidthCharacters = printableCharacters.zeroWidthCharacters
+    , partition           = printableCharacters.partition
+    , first               = printableCharacters.first
 
 describe ('printable-characters', () => {
 
     it ('determines visible length', () => {
-
-        const { strlen } = require ('./printable-characters')
 
         assert (strlen ('foo bar'), 7)
         assert (strlen ('\u001b[106mfoo bar\u001b[49m'), 7)
@@ -12,15 +20,11 @@ describe ('printable-characters', () => {
 
     it ('detects blank text', () => {
 
-        const { isBlank } = require ('./printable-characters')
-
         assert (!isBlank ('foobar'))
         assert ( isBlank ('\u001b[106m  \t  \t   \n     \u001b[49m'))
     })
 
     it ('matches zero-width characters and ANSI escape codes', () => {
-
-        const { ansiEscapeCodes, zeroWidthCharacters } = require ('./printable-characters')
 
         let s = '\u001b[106m' + 'foo' + '\n\n' + 'bar' + '\u001b[49m'
 
@@ -29,8 +33,6 @@ describe ('printable-characters', () => {
     })
 
     it ('obtains blank string of the same width', () => {
-
-        const { blank } = require ('./printable-characters')
 
         assert.equal (blank ('foo'), '   ')
         assert.equal (blank ('\n'), '\n')
@@ -41,8 +43,6 @@ describe ('printable-characters', () => {
 
     it ('extracts invisible parts followed by visible ones', () => {
 
-        const { partition } = require ('./printable-characters')
-
         assert.deepEqual (partition (''),                        [                                                     ])
         assert.deepEqual (partition ('foo'),                     [['',          'foo']                                 ])
         assert.deepEqual (partition ('\u001b[1mfoo'),            [['\u001b[1m', 'foo']                                 ])
@@ -51,8 +51,6 @@ describe ('printable-characters', () => {
     })
 
     it ('gets first N visible symbols (preserving invisible parts)', () => {
-
-        const { first } = require ('./printable-characters')
 
         assert.equal (first ('123456789', 0),   '')
         assert.equal (first ('123456789', 3),   '123')
