@@ -2,7 +2,7 @@
   "name": "printable-characters",
   "version": "1.0.31",
   "description": "A little helper for handling strings containing zero width control characters, ANSI styling, whitespaces, newlines, etc.",
-  "main": "printable-characters.js",
+  "main": "./build/printable-characters.js",
   "scripts": {
     "lint": "eslint printable-characters.js",
     "lint-test": "eslint printable-characters.js",
