@@ -61,6 +61,7 @@
   "homepage": "https://github.com/xpl/printable-characters",
   "devDependencies": {
     "babel-cli": "^6.26.0",
+    "babel-plugin-transform-es2015-block-scoped-functions": "^6.22.0",
     "babel-plugin-transform-es2015-destructuring": "^6.23.0",
     "coveralls": "^2.13.1",
     "eslint": "^4.7.2",
