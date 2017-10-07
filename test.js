@@ -1,7 +1,7 @@
 "use strict";
 
 const assert              = require ('assert')
-const printableCharacters = require ('./build/printable-characters')
+const printableCharacters = require (process.env.PRINTABLE_CHARACTERS_TEST_FILE)
 
 // cannot use spread operator in tests due to Node v4 compatibility requirements...
 const strlen              = printableCharacters.strlen
@@ -16,12 +16,14 @@ describe ('printable-characters', () => {
 
     it ('determines visible length', () => {
 
-        assert (strlen ('foo bar'), 7)
-        assert (strlen ('\u001b[106mfoo bar\u001b[49m'), 7)
+        assert.equal (strlen ('💩'), 2)
+        assert.equal (strlen ('foo bar'), 7)
+        assert.equal (strlen ('\u001b[106mfoo bar\u001b[49m'), 7)
     })
 
     it ('detects blank text', () => {
 
+        assert (!isBlank ('💩'))
         assert (!isBlank ('foobar'))
         assert ( isBlank ('\u001b[106m  \t  \t   \n     \u001b[49m'))
     })
@@ -36,6 +38,7 @@ describe ('printable-characters', () => {
 
     it ('obtains blank string of the same width', () => {
 
+        assert.equal (blank ('💩'), '  ')
         assert.equal (blank ('foo'), '   ')
         assert.equal (blank ('\n'), '\n')
         assert.equal (blank ('\t'), '\t')
