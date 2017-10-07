@@ -82,7 +82,7 @@ partition ('\u001b[1mfoo\u0000bar\n') // [['\u001b[1m', 'foo'],   ['\u0000', 'ba
 
 Handle multi-component emojis, as in [this article](http://blog.jonnew.com/posts/poo-dot-length-equals-two):
 
-```
+```javascript
 assert.equal (strlen ('👩‍❤️‍💋‍👩'), 1)  // FAILING, see http://blog.jonnew.com/posts/poo-dot-length-equals-two for possible solution
 assert.equal (blank ('👩‍❤️‍💋‍👩'), ' ') // FAILING, see http://blog.jonnew.com/posts/poo-dot-length-equals-two for possible solution
 ```
