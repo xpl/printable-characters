@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/xpl/printable-characters.svg?branch=master)](https://travis-ci.org/xpl/printable-characters) [![Coverage Status](https://coveralls.io/repos/github/xpl/printable-characters/badge.svg)](https://coveralls.io/github/xpl/printable-characters) [![npm](https://img.shields.io/npm/v/printable-characters.svg)](https://npmjs.com/package/printable-characters) [![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/xpl/printable-characters.svg)](https://scrutinizer-ci.com/g/xpl/printable-characters/?branch=master) [![dependencies Status](https://david-dm.org/xpl/printable-characters/status.svg)](https://david-dm.org/xpl/printable-characters)
 
-A little helper for handling strings containing zero width characters, ANSI styling, whitespaces, newlines, etc.
+A little helper for handling strings containing zero width characters, ANSI styling, whitespaces, newlines, [weird Unicode emojis](http://blog.jonnew.com/posts/poo-dot-length-equals-two), etc.
 
 ## Determining the real (visible) length of a string
 
@@ -27,6 +27,7 @@ isBlank ('\u001b[106m  \t  \t   \n     \u001b[49m') // === true
 ```javascript
 const { blank } = require ('printable-characters')
 
+blank ('💩')          // === ' '
 blank ('foo')         // === '   '
 blank ('\tfoo \nfoo') // === '\t    \n   '
 blank ('\u001b[22m\u001b[1mfoo \t\u001b[39m\u001b[22m')) // === '    \t'
@@ -76,3 +77,12 @@ partition ('\u001b[1mfoo\u0000bar\n') // [['\u001b[1m', 'foo'],   ['\u0000', 'ba
 - [string.bullet](https://github.com/xpl/string.bullet) — ASCII-mode bulleting for the list-style data
 - [string.ify](https://github.com/xpl/string.ify) — a fancy pretty printer for the JavaScript entities
 - [Ololog!](https://github.com/xpl/ololog) — a better `console.log` for the log-driven debugging junkies!
+
+# TODO
+
+Handle multi-component emojis, as in [this article](http://blog.jonnew.com/posts/poo-dot-length-equals-two):
+
+```
+assert.equal (strlen ('👩‍❤️‍💋‍👩'), 1)  // FAILING, see http://blog.jonnew.com/posts/poo-dot-length-equals-two for possible solution
+assert.equal (blank ('👩‍❤️‍💋‍👩'), ' ') // FAILING, see http://blog.jonnew.com/posts/poo-dot-length-equals-two for possible solution
+```

@@ -1,7 +1,7 @@
 "use strict";
 
 const ansiEscapeCode                   = '[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-PRZcf-nqry=><]'
-    , zeroWidthCharacterExceptNewline  = '\u0000-\u0008\u000B-\u0019\u001b\u009b\u00ad\u200b\u2028\u2029\ufeff'
+    , zeroWidthCharacterExceptNewline  = '\u0000-\u0008\u000B-\u0019\u001b\u009b\u00ad\u200b\u2028\u2029\ufeff\ufe00-\ufe0f'
     , zeroWidthCharacter               = '\n' + zeroWidthCharacterExceptNewline
     , zeroWidthCharactersExceptNewline = new RegExp ('(?:' + ansiEscapeCode + ')|[' + zeroWidthCharacterExceptNewline + ']', 'g')
     , zeroWidthCharacters              = new RegExp ('(?:' + ansiEscapeCode + ')|[' + zeroWidthCharacter + ']', 'g')
@@ -13,15 +13,15 @@ module.exports = {
 
     ansiEscapeCodes: new RegExp (ansiEscapeCode, 'g'),
 
-    strlen: s => s.replace (zeroWidthCharacters, '')
-                  .length,
+    strlen: s => Array.from (s.replace (zeroWidthCharacters, '')).length,
 
     isBlank: s => s.replace (zeroWidthCharacters, '')
                    .replace (/\s/g, '')
                    .length === 0,
 
-    blank: s => s.replace (zeroWidthCharactersExceptNewline, '')
-                 .replace (/[^\t\n]/g, ' '),
+    blank: s => Array.from (s.replace (zeroWidthCharactersExceptNewline, ''))
+                     .map (x => ((x === '\t') || (x === '\n')) ? x : ' ')
+                     .join (''),
 
     partition (s) {
         for (var m, spans = []; (partition.lastIndex !== s.length) && (m = partition.exec (s));) { spans.push ([m[1] || '', m[2]]) }

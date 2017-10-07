@@ -16,7 +16,9 @@ describe ('printable-characters', () => {
 
     it ('determines visible length', () => {
 
-        assert.equal (strlen ('💩'), 2)
+        assert.equal (strlen ('💩'), 1)
+        //assert.equal (strlen ('👩‍❤️‍💋‍👩'), 1) // FAILING, see http://blog.jonnew.com/posts/poo-dot-length-equals-two for possible solution
+        assert.equal (strlen ('❤️'), 1)
         assert.equal (strlen ('foo bar'), 7)
         assert.equal (strlen ('\u001b[106mfoo bar\u001b[49m'), 7)
     })
@@ -38,7 +40,9 @@ describe ('printable-characters', () => {
 
     it ('obtains blank string of the same width', () => {
 
-        assert.equal (blank ('💩'), '  ')
+        assert.equal (blank ('💩'), ' ')
+        //assert.equal (blank ('👩‍❤️‍💋‍👩'), ' ') // FAILING, see http://blog.jonnew.com/posts/poo-dot-length-equals-two for possible solution
+        assert.equal (blank ('❤️'), ' ')
         assert.equal (blank ('foo'), '   ')
         assert.equal (blank ('\n'), '\n')
         assert.equal (blank ('\t'), '\t')
