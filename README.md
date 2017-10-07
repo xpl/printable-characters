@@ -78,7 +78,7 @@ partition ('\u001b[1mfoo\u0000bar\n') // [['\u001b[1m', 'foo'],   ['\u0000', 'ba
 - [string.ify](https://github.com/xpl/string.ify) — a fancy pretty printer for the JavaScript entities
 - [Ololog!](https://github.com/xpl/ololog) — a better `console.log` for the log-driven debugging junkies!
 
-# TODO
+## TODO
 
 Handle multi-component emojis, as in [this article](http://blog.jonnew.com/posts/poo-dot-length-equals-two):
 
