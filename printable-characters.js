@@ -13,13 +13,13 @@ module.exports = {
 
     ansiEscapeCodes: new RegExp (ansiEscapeCode, 'g'),
 
-    strlen: s => Array.from (s.replace (zeroWidthCharacters, '')).length,
+    strlen: s => Array.from (s.replace (zeroWidthCharacters, '')).length, // Array.from solves the emoji problem as described here: http://blog.jonnew.com/posts/poo-dot-length-equals-two
 
     isBlank: s => s.replace (zeroWidthCharacters, '')
                    .replace (/\s/g, '')
                    .length === 0,
 
-    blank: s => Array.from (s.replace (zeroWidthCharactersExceptNewline, ''))
+    blank: s => Array.from (s.replace (zeroWidthCharactersExceptNewline, '')) // Array.from solves the emoji problem as described here: http://blog.jonnew.com/posts/poo-dot-length-equals-two
                      .map (x => ((x === '\t') || (x === '\n')) ? x : ' ')
                      .join (''),
 
@@ -34,8 +34,8 @@ module.exports = {
         let result = '', length = 0
 
         for (const [nonPrintable, printable] of module.exports.partition (s)) {
-            const text = printable.substr (0, n - length)
-            result += nonPrintable + text
+            const text = Array.from (printable).slice (0, n - length) // Array.from solves the emoji problem as described here: http://blog.jonnew.com/posts/poo-dot-length-equals-two
+            result += nonPrintable + text.join ('')
             length += text.length
         }
 

@@ -60,18 +60,18 @@ describe ('printable-characters', () => {
     })
 
     it ('gets first N visible symbols (preserving invisible parts)', () => {
+   
+        assert.equal (first ('💩23456789', 0),   '')
+        assert.equal (first ('💩23456789', 3),   '💩23')
+        assert.equal (first ('💩23456789', 100), '💩23456789')
 
-        assert.equal (first ('123456789', 0),   '')
-        assert.equal (first ('123456789', 3),   '123')
-        assert.equal (first ('123456789', 100), '123456789')
-
-        const s = '\u001b[22m\u001b[1m' + '123' + '\u0000' + '45' + '\u001b[39m' + '67' + '\n' + '89' + '\u001b[39m\u001b[22m'
+        const s = '\u001b[22m\u001b[1m' + '💩23' + '\u0000' + '45' + '\u001b[39m' + '67' + '\n' + '89' + '\u001b[39m\u001b[22m'
         
         assert.equal (first (s, 0),   '\u001b[22m\u001b[1m' + ''    + '\u0000' + ''   + '\u001b[39m' + ''   + '\n' + ''   + '\u001b[39m\u001b[22m')
-        assert.equal (first (s, 3),   '\u001b[22m\u001b[1m' + '123' + '\u0000' + ''   + '\u001b[39m' + ''   + '\n' + ''   + '\u001b[39m\u001b[22m')
-        assert.equal (first (s, 4),   '\u001b[22m\u001b[1m' + '123' + '\u0000' + '4'  + '\u001b[39m' + ''   + '\n' + ''   + '\u001b[39m\u001b[22m')
-        assert.equal (first (s, 6),   '\u001b[22m\u001b[1m' + '123' + '\u0000' + '45' + '\u001b[39m' + '6'  + '\n' + ''   + '\u001b[39m\u001b[22m')
-        assert.equal (first (s, 9),   '\u001b[22m\u001b[1m' + '123' + '\u0000' + '45' + '\u001b[39m' + '67' + '\n' + '89' + '\u001b[39m\u001b[22m')
-        assert.equal (first (s, 100), '\u001b[22m\u001b[1m' + '123' + '\u0000' + '45' + '\u001b[39m' + '67' + '\n' + '89' + '\u001b[39m\u001b[22m')
+        assert.equal (first (s, 3),   '\u001b[22m\u001b[1m' + '💩23' + '\u0000' + ''   + '\u001b[39m' + ''   + '\n' + ''   + '\u001b[39m\u001b[22m')
+        assert.equal (first (s, 4),   '\u001b[22m\u001b[1m' + '💩23' + '\u0000' + '4'  + '\u001b[39m' + ''   + '\n' + ''   + '\u001b[39m\u001b[22m')
+        assert.equal (first (s, 6),   '\u001b[22m\u001b[1m' + '💩23' + '\u0000' + '45' + '\u001b[39m' + '6'  + '\n' + ''   + '\u001b[39m\u001b[22m')
+        assert.equal (first (s, 9),   '\u001b[22m\u001b[1m' + '💩23' + '\u0000' + '45' + '\u001b[39m' + '67' + '\n' + '89' + '\u001b[39m\u001b[22m')
+        assert.equal (first (s, 100), '\u001b[22m\u001b[1m' + '💩23' + '\u0000' + '45' + '\u001b[39m' + '67' + '\n' + '89' + '\u001b[39m\u001b[22m')
     })
 })
