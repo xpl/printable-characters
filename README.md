@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/xpl/printable-characters.svg?branch=master)](https://travis-ci.org/xpl/printable-characters) [![Coverage Status](https://coveralls.io/repos/github/xpl/printable-characters/badge.svg)](https://coveralls.io/github/xpl/printable-characters) [![npm](https://img.shields.io/npm/v/printable-characters.svg)](https://npmjs.com/package/printable-characters) [![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/xpl/printable-characters.svg)](https://scrutinizer-ci.com/g/xpl/printable-characters/?branch=master) [![dependencies Status](https://david-dm.org/xpl/printable-characters/status.svg)](https://david-dm.org/xpl/printable-characters)
 
-A little helper for handling strings containing zero width characters, ANSI styling, whitespaces, newlines, [weird Unicode emojis](http://blog.jonnew.com/posts/poo-dot-length-equals-two), etc.
+A little helper for handling strings containing zero width characters, ANSI styling, whitespaces, newlines, [weird Unicode 💩 symbols](http://blog.jonnew.com/posts/poo-dot-length-equals-two), etc.
 
 ## Determining the real (visible) length of a string
 
