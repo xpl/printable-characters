@@ -1,6 +1,6 @@
 {
   "name": "printable-characters",
-  "version": "1.0.40",
+  "version": "1.0.41",
   "description": "A little helper for handling strings containing zero width control characters, ANSI styling, whitespaces, newlines, 💩, etc.",
   "main": "./build/printable-characters.js",
   "scripts": {
