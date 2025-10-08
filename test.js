@@ -20,7 +20,7 @@ describe ('printable-characters', () => {
         //assert.equal (strlen ('👩‍❤️‍💋‍👩'), 1) // FAILING, see http://blog.jonnew.com/posts/poo-dot-length-equals-two for possible solution
         assert.equal (strlen ('❤️'), 1)
         assert.equal (strlen ('foo bar'), 7)
-        assert.equal (strlen ('\u001b[106mfoo bar\u001b[49m'), 7)
+        assert.equal (strlen ('\u001b[106mfoo bar\u001b[49m\u180e'), 7)
     })
 
     it ('detects blank text', () => {
@@ -28,11 +28,12 @@ describe ('printable-characters', () => {
         assert (!isBlank ('💩'))
         assert (!isBlank ('foobar'))
         assert ( isBlank ('\u001b[106m  \t  \t   \n     \u001b[49m'))
+        assert ( isBlank ('\u001b[106m  \t  \t   \n     \u001b[49m \u180e'))
     })
 
     it ('matches zero-width characters and ANSI escape codes', () => {
 
-        let s = '\u001b[106m' + 'foo' + '\n\n' + 'bar' + '\u001b[49m'
+        let s = '\u001b[106m' + 'foo' + '\n\n' + 'bar' + '\u001b[49m\u180e'
 
         assert (s = s.replace (ansiEscapeCodes, ''), 'foo\n\nbar')
         assert (    s.replace (zeroWidthCharacters, ''), 'foobar')
@@ -47,7 +48,7 @@ describe ('printable-characters', () => {
         assert.equal (blank ('\n'), '\n')
         assert.equal (blank ('\t'), '\t')
         assert.equal (blank ('\tfoo \nfoo'), '\t    \n   ')
-        assert.equal (blank ('\u001b[22m\u001b[1mfoo \t\u001b[39m\u001b[22m'), '    \t')
+        assert.equal (blank ('\u001b[22m\u001b[1mfoo \t\u001b[39m\u001b[22m\u180e'), '    \t')
     })
 
     it ('extracts invisible parts followed by visible ones', () => {
@@ -65,13 +66,13 @@ describe ('printable-characters', () => {
         assert.equal (first ('💩23456789', 3),   '💩23')
         assert.equal (first ('💩23456789', 100), '💩23456789')
 
-        const s = '\u001b[22m\u001b[1m' + '💩23' + '\u0000' + '45' + '\u001b[39m' + '67' + '\n' + '89' + '\u001b[39m\u001b[22m'
+        const s = '\u001b[22m\u001b[1m' + '💩23' + '\u0000' + '45' + '\u001b[39m' + '67' + '\n' + '89' + '\u001b[39m\u001b[22m\u180e'
         
-        assert.equal (first (s, 0),   '\u001b[22m\u001b[1m' + ''    + '\u0000' + ''   + '\u001b[39m' + ''   + '\n' + ''   + '\u001b[39m\u001b[22m')
-        assert.equal (first (s, 3),   '\u001b[22m\u001b[1m' + '💩23' + '\u0000' + ''   + '\u001b[39m' + ''   + '\n' + ''   + '\u001b[39m\u001b[22m')
-        assert.equal (first (s, 4),   '\u001b[22m\u001b[1m' + '💩23' + '\u0000' + '4'  + '\u001b[39m' + ''   + '\n' + ''   + '\u001b[39m\u001b[22m')
-        assert.equal (first (s, 6),   '\u001b[22m\u001b[1m' + '💩23' + '\u0000' + '45' + '\u001b[39m' + '6'  + '\n' + ''   + '\u001b[39m\u001b[22m')
-        assert.equal (first (s, 9),   '\u001b[22m\u001b[1m' + '💩23' + '\u0000' + '45' + '\u001b[39m' + '67' + '\n' + '89' + '\u001b[39m\u001b[22m')
-        assert.equal (first (s, 100), '\u001b[22m\u001b[1m' + '💩23' + '\u0000' + '45' + '\u001b[39m' + '67' + '\n' + '89' + '\u001b[39m\u001b[22m')
+        assert.equal (first (s, 0),   '\u001b[22m\u001b[1m' + ''    + '\u0000' + ''   + '\u001b[39m' + ''   + '\n' + ''   + '\u001b[39m\u001b[22m\u180e')
+        assert.equal (first (s, 3),   '\u001b[22m\u001b[1m' + '💩23' + '\u0000' + ''   + '\u001b[39m' + ''   + '\n' + ''   + '\u001b[39m\u001b[22m\u180e')
+        assert.equal (first (s, 4),   '\u001b[22m\u001b[1m' + '💩23' + '\u0000' + '4'  + '\u001b[39m' + ''   + '\n' + ''   + '\u001b[39m\u001b[22m\u180e')
+        assert.equal (first (s, 6),   '\u001b[22m\u001b[1m' + '💩23' + '\u0000' + '45' + '\u001b[39m' + '6'  + '\n' + ''   + '\u001b[39m\u001b[22m\u180e')
+        assert.equal (first (s, 9),   '\u001b[22m\u001b[1m' + '💩23' + '\u0000' + '45' + '\u001b[39m' + '67' + '\n' + '89' + '\u001b[39m\u001b[22m\u180e')
+        assert.equal (first (s, 100), '\u001b[22m\u001b[1m' + '💩23' + '\u0000' + '45' + '\u001b[39m' + '67' + '\n' + '89' + '\u001b[39m\u001b[22m\u180e')
     })
 })
