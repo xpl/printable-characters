@@ -36,6 +36,10 @@ describe ('printable-characters', () => {
 
         assert (s = s.replace (ansiEscapeCodes, ''), 'foo\n\nbar')
         assert (    s.replace (zeroWidthCharacters, ''), 'foobar')
+        
+        // Test U+180E (Mongolian Vowel Separator)
+        assert.equal (strlen ('foo\u180ebar'), 6)
+        assert.equal (strlen ('foo'), strlen ('foo\u180e'))
     })
 
     it ('obtains blank string of the same width', () => {
